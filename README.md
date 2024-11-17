@@ -1,8 +1,11 @@
 ## Download do Arquivo LaTeX
 
 Clique no link abaixo para baixar o arquivo `.tex`:
-
 [Baixar arquivo.tex](https://raw.githubusercontent.com/Ak4ai/AEDS2_Atividades_Sobre_Arvores/refs/heads/main/conference_101719.tex?token=GHSAT0AAAAAACY2C3BJ34LUYHHUPL63K75CZZZI4DA)
+
+
+Clique no link abaixo para baixar o arquivo `.pdf`:
+[Baixar arquivo.pdf](https://github.com/Ak4ai/AEDS2_Atividades_Sobre_Arvores/blob/main/Pratica_03_AEDS_2.pdf)
 
 # Exercícios de Prática № 1
 
