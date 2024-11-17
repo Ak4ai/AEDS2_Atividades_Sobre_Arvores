@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run-Code",
+            "type": "shell",
+            "command": "clean_and_build",
+            "windows": {
+                "command": "mingw32-make clean; mingw32-make; mingw32-make run"
+            },
+            "linux": {
+                "command": "make clean && make && make run"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Compilação e execução do código usando make no Linux e mingw32-make no Windows"
+        }
+    ]
+}
