@@ -86,3 +86,27 @@ Propor rotações ou reordenações manuais que reduzam a profundidade da árvor
 1. Clone este repositório:
    ```bash
    git clone https://github.com/seu-usuario/exercicios-arvores-binarias.git
+
+## Organização do Repositório
+
+O repositório está organizado da seguinte forma:
+
+- **Exe 4/**: Contém os arquivos e configurações para o exercício 4.
+  - **.vscode/**: Configurações específicas do Visual Studio Code.
+  - **build/**: Diretório de saída para os arquivos compilados.
+  - **src/**: Código-fonte do exercício 4.
+  - **Makefile**: Arquivo para automação da compilação.
+
+- **Exe 5/**: Contém os arquivos e configurações para o exercício 5.
+  - **.vscode/**: Configurações específicas do Visual Studio Code.
+  - **build/**: Diretório de saída para os arquivos compilados.
+  - **src/**: Código-fonte do exercício 5.
+  - **Makefile**: Arquivo para automação da compilação.
+  - **datasetia.py**: Script Python relacionado ao exercício.
+  - **dicionario.txt**: Arquivo de texto com um dicionário.
+  - **google-10000-english-usa.txt**: Arquivo de texto com palavras em inglês.
+  - **palavras_portugues.txt**: Arquivo de texto com palavras em português.
+  - **testeopenai.py**: Script Python para testes.
+
+- **conference_101719.tex**: Arquivo LaTeX do projeto.
+- **README.md**: Este arquivo de descrição do repositório.
