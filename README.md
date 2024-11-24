@@ -90,23 +90,39 @@ Propor rotações ou reordenações manuais que reduzam a profundidade da árvor
 
 O repositório está organizado da seguinte forma:
 
+- **Exe 1 (Desafio)**: Contém os arquivos e configurações para o exercício 1.
+  - **.vscode/**: Configurações específicas do Visual Studio Code.
+  - **build/**: Diretório de saída para os arquivos compilados.
+    - **app**: Arquivo executável.
+    - **objects/**: Diretório de objetos compilados.
+  - **src/**: Código-fonte do exercício 1.
+    - **main.cpp**: Arquivo principal do código-fonte.
+  - **Makefile**: Arquivo para automação da compilação.
+
 - **Exe 4/**: Contém os arquivos e configurações para o exercício 4.
   - **.vscode/**: Configurações específicas do Visual Studio Code.
   - **build/**: Diretório de saída para os arquivos compilados.
+    - **app**: Arquivo executável.
   - **src/**: Código-fonte do exercício 4.
+    - **main.cpp**: Arquivo principal do código-fonte.
   - **Makefile**: Arquivo para automação da compilação.
 
 - **Exe 5/**: Contém os arquivos e configurações para o exercício 5.
   - **.vscode/**: Configurações específicas do Visual Studio Code.
   - **build/**: Diretório de saída para os arquivos compilados.
   - **src/**: Código-fonte do exercício 5.
+    - **avl.cpp**: Implementação da árvore AVL.
+    - **avl.h**: Cabeçalho da árvore AVL.
+    - **bst.cpp**: Implementação da árvore BST.
+    - **bst.h**: Cabeçalho da árvore BST.
+    - **main.cpp**: Arquivo principal do código-fonte.
+  - **datasetia.py**: Script Python relacionado ao exercício.
+  - **dicionario.txt**: Arquivo de texto com um dicionário.
+  - **google-10000-english-usa.txt**: Arquivo de texto com palavras em inglês.
+  - **palavras_portugues.txt**: Arquivo de texto com palavras em português.
+  - **testeopenai.py**: Script Python para testes.
   - **Makefile**: Arquivo para automação da compilação.
-  - **datasets/**: Diretório de testes de datasets para dicionário.
-     - **datasetia.py**: Script Python relacionado ao exercício.
-     - **dicionario.txt**: Arquivo de texto com um dicionário.
-     - **google-10000-english-usa.txt**: Arquivo de texto com palavras em inglês.
-     - **palavras_portugues.txt**: Arquivo de texto com palavras em português.
-     - **testeopenai.py**: Script Python para testes.
 
-- **conference_101719.tex**: Arquivo LaTeX do projeto.
+- **Pratica_03_AEDS_2.html**: Arquivo HTML do projeto.
+- **Pratica_03_AEDS_2.tex**: Arquivo LaTeX do projeto.
 - **README.md**: Este arquivo de descrição do repositório.

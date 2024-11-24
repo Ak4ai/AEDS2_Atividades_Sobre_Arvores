@@ -12,6 +12,31 @@ struct Node {
     Node(int value) : data(value), left(nullptr), right(nullptr) {}
 };
 
+
+// Função para calcular a profundidade máxima da árvore
+int calcularProfundidade(Node* node) {
+    if (node == nullptr) return 0;
+    return 1 + std::max(calcularProfundidade(node->left), calcularProfundidade(node->right));
+}
+
+void sugerirRotacoes(Node* root) {
+    if (root == nullptr) return;
+
+    int profundidadeEsquerda = calcularProfundidade(root->left);
+    int profundidadeDireita = calcularProfundidade(root->right);
+
+    std::cout << "Nó " << root->data << ": profundidade esquerda = " << profundidadeEsquerda
+              << ", profundidade direita = " << profundidadeDireita << std::endl;
+
+    if (std::abs(profundidadeEsquerda - profundidadeDireita) > 1) {
+        if (profundidadeEsquerda > profundidadeDireita) {
+            std::cout << "Sugestão: Rotação à direita no nó com valor " << root->data << std::endl;
+        } else {
+            std::cout << "Sugestão: Rotação à esquerda no nó com valor " << root->data << std::endl;
+        }
+    }
+}
+
 // Funcao para inserir um novo no na arvore
 Node* insert(Node* root, int value) {
     if (root == nullptr) {
@@ -25,7 +50,7 @@ Node* insert(Node* root, int value) {
     return root;
 }
 
-// Funcao para encontrar o valor minimo em uma arvore (usada na remocao)
+// Funcao para encontrar o value minimo em uma arvore (usada na remocao)
 Node* findMin(Node* root) {
     while (root->left != nullptr) {
         root = root->left;
@@ -87,8 +112,8 @@ void mostrarCaminhoMaisLongo(Node* root) {
     encontrarCaminhoMaisLongo(root, caminhoAtual, caminhoMaisLongo);
 
     cout << "Caminho mais longo da raiz ate a folha mais distante: ";
-    for (int valor : caminhoMaisLongo) {
-        cout << valor << " ";
+    for (int value : caminhoMaisLongo) {
+        cout << value << " ";
     }
     cout << endl;
 }
@@ -113,7 +138,7 @@ void printArvore(Node* root, string prefixo = "", bool isLeft = true) {
             prefixo += "    ";
         }
 
-        // Printar o valor do no atual
+        // Printar o value do no atual
         cout << root->data << endl;
 
         // Chamar recursivamente para os filhos esquerdo e direito
@@ -163,7 +188,7 @@ void compararCrescimentoArvores(const vector<int>& insercoesDesbalanceada, const
 
 void modificarArvore(Node*& root) {
     char escolha;
-    int valor;
+    int value;
 
     cout << "Estrutura da árvore atualizada:" << endl;
     printArvore(root);
@@ -175,15 +200,15 @@ void modificarArvore(Node*& root) {
             break; // Sair do loop
         }
 
-        cout << "Digite o valor do no: ";
-        cin >> valor;
+        cout << "Digite o value do no: ";
+        cin >> value;
 
         if (escolha == 'I' || escolha == 'i') {
-            root = insert(root, valor);
-            cout << "No " << valor << " inserido com sucesso." << endl;
+            root = insert(root, value);
+            cout << "No " << value << " inserido com sucesso." << endl;
         } else if (escolha == 'R' || escolha == 'r') {
-            root = remove(root, valor);
-            cout << "No " << valor << " removido com sucesso." << endl;
+            root = remove(root, value);
+            cout << "No " << value << " removido com sucesso." << endl;
         } else {
             cout << "Escolha inválida. Tente novamente." << endl;
             continue; // Solicitar novamente
@@ -193,6 +218,7 @@ void modificarArvore(Node*& root) {
         exibirInfoArvore(root);
         cout << "Estrutura da árvore atualizada:" << endl;
         printArvore(root);
+        sugerirRotacoes(root);
     }
 }
 
@@ -206,17 +232,17 @@ int main() {
     vector<int> insercoesEquilibrada = {50, 30, 70, 20, 40, 60, 80, 10, 90, 100};
 
     cout << "Crescimento da arvore desbalanceada:\n";
-    for (int valor : insercoesDesbalanceada) {
-        rootDesbalanceada = insert(rootDesbalanceada, valor);
+    for (int value : insercoesDesbalanceada) {
+        rootDesbalanceada = insert(rootDesbalanceada, value);
         int nivelMaximo = calcNivelMaximo(rootDesbalanceada);
-        cout << "Apos inserir " << valor << ", nivel maximo: " << nivelMaximo << endl;
+        cout << "Apos inserir " << value << ", nivel maximo: " << nivelMaximo << endl;
     }
 
     cout << "\nCrescimento da arvore equilibrada:\n";
-    for (int valor : insercoesEquilibrada) {
-        rootEquilibrada = insert(rootEquilibrada, valor);
+    for (int value : insercoesEquilibrada) {
+        rootEquilibrada = insert(rootEquilibrada, value);
         int nivelMaximo = calcNivelMaximo(rootEquilibrada);
-        cout << "Apos inserir " << valor << ", nivel maximo: " << nivelMaximo << endl;
+        cout << "Apos inserir " << value << ", nivel maximo: " << nivelMaximo << endl;
     }
 
     // Exibir informacões finais das duas arvores
@@ -238,11 +264,12 @@ int main() {
 
     // Criar uma árvore a partir das inserções equilibradas para a modificaçao
     Node* root = nullptr;
-    for (int valor : insercoesEquilibrada) {
-        root = insert(root, valor);
+    for (int value : insercoesEquilibrada) {
+        root = insert(root, value);
     }
 
     // Permitir ao usuário modificar a árvore
+
     modificarArvore(root);
 
     return 0;

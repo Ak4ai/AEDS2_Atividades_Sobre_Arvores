@@ -1,0 +1,991 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{trees}
+\usepackage[a4paper, margin=2cm]{geometry}
+
+
+\title{Prática 03 - AEDS 2}
+\author{Henrique Freitas}
+\date{October 2024}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\section{Questão 1: Construção de Árvores Binárias de Busca}
+\subsection{Questão 1.1:  Construa as árvores binárias e desenhe a estrutura da árvore após cada inserção}
+\end{center}
+Considerando os conceitos de inserção, remoção, pesquisa e caminhamento em árvores binárias, resolvemos as seguintes questões com base nos conjuntos de dados apresentados:
+
+1. Construa as árvores binárias de busca a partir dos conjuntos abaixo e desenhe a estrutura da árvore após cada inserção de \(k\) elementos.
+
+
+\begin{center}
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \subsubsection{Árvore 1: \{88, 22, 45, 33, 22, 90, 27, 59, 13\}}
+    \begin{tikzpicture}
+      [
+        level 1/.style={sibling distance=40mm},
+        level 2/.style={sibling distance=20mm},
+        level 3/.style={sibling distance=15mm},
+        edge from parent/.style={draw,-latex}
+      ]
+      \node {88}
+        child {node {22}
+          child {node {13}}
+          child {node {45}
+            child {node {33}
+              child {node {27}}
+            }
+            child {node {59}}
+          }
+        }
+        child {node {90}};
+    \end{tikzpicture}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \vspace{0.5cm}
+    \subsubsection{Árvore 2: \{65, 47, 21, 11, 72, 23, 05, 34, 28\}}
+    \begin{tikzpicture}
+      [
+        level 1/.style={sibling distance=40mm},
+        level 2/.style={sibling distance=20mm},
+        level 3/.style={sibling distance=15mm},
+        edge from parent/.style={draw,-latex}
+      ]
+      \node {65}
+        child {node {47}
+          child {node {21}
+            child {node {11}
+              child {node {05}}
+            }
+            child {node {23}
+              child {node {34}
+                child {node {28}}
+              }
+            }
+          }
+        }
+        child {node {72}};
+    \end{tikzpicture}
+  \end{minipage}
+  
+  \vspace{1cm} % Espaçamento vertical entre as linhas
+  
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \subsubsection{Árvore 3: \{65, 34, 89, 23, 60, 54, 81, 95, 39\}}
+    \begin{tikzpicture}
+      [
+        level 1/.style={sibling distance=40mm},
+        level 2/.style={sibling distance=20mm},
+        level 3/.style={sibling distance=15mm},
+        edge from parent/.style={draw,-latex}
+      ]
+      \node {65}
+        child {node {34}
+          child {node {23}}
+          child {node {60}
+            child {node {54}}
+            child {node {89}
+              child {node {81}}
+              child {node {95}}
+            }
+          }
+        };
+    \end{tikzpicture}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \subsubsection{Árvore 4: \{15, 10, 20, 05, 12, 18, 25, 98, 44\}}
+    \begin{tikzpicture}
+      [
+        level 1/.style={sibling distance=40mm},
+        level 2/.style={sibling distance=20mm},
+        level 3/.style={sibling distance=15mm},
+        edge from parent/.style={draw,-latex}
+      ]
+      \node {15}
+        child {node {10}
+          child {node {05}}
+          child {node {12}}
+        }
+        child {node {20}
+          child {node {18}}
+          child {node {25}
+            child {node {98}
+              child {node {44}}
+            }
+          }
+        };
+    \end{tikzpicture}
+  \end{minipage}
+\end{center}
+
+\subsection{Questão 1.2: Remoção de Elementos em Árvores Binárias de Busca}
+
+Nesta questão, realizamos a remoção dos elementos indicados e redesenhamos as árvores após cada remoção. Discutimos o impacto estrutural, abordando os diferentes casos de remoção (remoção de folha, remoção de nó com um filho e remoção de nó com dois filhos). Além disso, justificamos a escolha entre o sucessor in-ordem ou o predecessor in-ordem para os casos de remoção de nós com dois filhos.
+
+\begin{center}
+\vspace{1cm}
+\subsubsection{Árvore 1: \{33, 90, 33, 45\}}
+
+\begin{minipage}{0.45\textwidth}
+\centering
+\paragraph{Remoção de 33:} O nó 33 tem um filho (27). Ao removermos o nó com um filho, movemos o filho (27) para a posição de 33.
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=40mm},
+    level 2/.style={sibling distance=20mm},
+    level 3/.style={sibling distance=15mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {88}
+    child {node {22}
+      child {node {13}}
+      child {node {45}
+        child {node {27}}
+        child {node {59}}
+      }
+    }
+    child {node {90}};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\paragraph{Remoção de 90:} O nó 90 é uma folha, então sua remoção não impacta a estrutura da árvore.
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=40mm},
+    level 2/.style={sibling distance=20mm},
+    level 3/.style={sibling distance=15mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {88}
+    child {node {22}
+      child {node {13}}
+      child {node {45}
+        child {node {27}}
+        child {node {59}}
+      }
+    };
+\end{tikzpicture}
+\end{minipage}
+
+\vspace{1cm} % Espaçamento entre as remoções
+
+\begin{minipage}{0.50\textwidth}
+\centering
+\paragraph{Remoção de 45:} O nó 45 tem dois filhos (27 e 59). Para a remoção de um nó com dois filhos, escolhemos o sucessor, que é o nó 59, e substituímos 45 por 59.
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=40mm},
+    level 2/.style={sibling distance=20mm},
+    level 3/.style={sibling distance=15mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {88}
+    child {node {22}
+      child {node {13}}
+      child {node {59}
+        child {node {27}}
+      }
+    };
+\end{tikzpicture}
+\end{minipage}
+\end{center}
+
+\newpage
+
+\begin{center}
+\subsubsection{Árvore 2: \{11, 72, 65, 23\}}
+\end{center}
+\vspace{1cm}
+\begin{center}
+\begin{minipage}{0.45\textwidth}
+\centering
+\paragraph{Remoção de 11:} O nó 11 é uma folha. Sua remoção não afeta a estrutura da árvore.
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=40mm},
+    level 2/.style={sibling distance=30mm},
+    level 3/.style={sibling distance=20mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {65}
+    child {node {47}
+      child {node {21}
+        child {node {05}}
+        child {node {23}
+          child {node {34}
+            child {node {28}}
+          }
+        }
+      }
+    }
+    child {node {72}};
+\end{tikzpicture}
+\vspace{-1.5cm} % Ajuste de espaçamento vertical
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\vspace{1.5cm}
+\centering
+\textbf{Remoção de 72:} O nó 72 é uma folha, então a remoção não afeta a estrutura.\\[0cm] % Força o texto e a imagem a ficarem separados por 0.5cm
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=40mm},
+    level 2/.style={sibling distance=30mm},
+    level 3/.style={sibling distance=20mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {65}
+    child {node {47}
+      child {node {21}
+        child {node {05}}
+        child {node {23}
+          child {node {34}
+            child {node {28}}
+          }
+        }
+      }
+    };
+\end{tikzpicture}
+\end{minipage}
+
+\vspace{1cm} % Espaçamento entre remoções
+
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Remoção de 65:} O nó 65 tem dois filhos (47 e 72). Escolhemos o sucessor in-ordem (47) para substituir 65.\\[0cm]
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=40mm},
+    level 2/.style={sibling distance=30mm},
+    level 3/.style={sibling distance=20mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {47}
+    child {node {21}
+      child {node {05}}
+      child {node {23}
+        child {node {34}
+          child {node {28}}
+        }
+      }
+    };
+\end{tikzpicture}
+\vspace{-1.5cm} % Ajuste de espaçamento vertical
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Remoção de 23:} O nó 23 tem um filho (34). Removemos o nó e movemos 34 para a posição de 23.\\[0px ]
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=40mm},
+    level 2/.style={sibling distance=30mm},
+    level 3/.style={sibling distance=20mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {47}
+    child {node {21}
+      child {node {05}}
+      child {node {34}
+        child {node {28}}
+      }
+    };
+\end{tikzpicture}
+\end{minipage}
+\end{center}
+
+\newpage
+\begin{center}
+\subsubsection{Árvore 3: \{34, 89, 81, 95\}}
+\end{center}
+\vspace{1cm}
+\begin{center}
+\begin{minipage}{0.45\textwidth}
+\paragraph{Remoção de 34:} O nó 34 tem dois filhos. O sucessor in-ordem (39) é usado para substituir 34.
+\centering
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=30mm},
+    level 2/.style={sibling distance=20mm},
+    level 3/.style={sibling distance=10mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {65}
+    child {node {39}
+      child {node {23}}
+      child {node {60}
+        child {node {54}}
+      }
+    }
+    child {node {89}
+      child {node {81}}
+      child {node {95}}
+    };
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\paragraph{Remoção de 89:} O nó 89 tem dois filhos (81 e 95). Escolhemos o sucessor in-ordem, que é o 95.
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=30mm},
+    level 2/.style={sibling distance=20mm},
+    level 3/.style={sibling distance=10mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {65}
+    child {node {39}
+      child {node {23}}
+      child {node {60}
+        child {node {54}}
+      }
+    }
+    child {node {95}
+      child {node {81}}
+    };
+\end{tikzpicture}
+\end{minipage}
+\end{center}
+
+\vspace{0.5cm} % Espaçamento entre as remoções
+\begin{center}
+\begin{minipage}{0.45\textwidth}
+\centering
+\paragraph{Remoção de 81 e 95:} Ambas são folhas e são removidas sem impacto estrutural.
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=40mm},
+    level 2/.style={sibling distance=30mm},
+    level 3/.style={sibling distance=20mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {65}
+    child {node {39}
+      child {node {23}}
+      child {node {60}
+        child {node {54}}
+      }
+    };
+\end{tikzpicture}
+\vspace{1cm} % Ajuste de espaçamento
+\end{minipage}
+\end{center}
+
+\newpage
+\begin{center}
+\subsubsection{Árvore 4: \{20, 05, 18, 44\}}
+\vspace{1cm}
+\end{center}
+\begin{center}
+\begin{minipage}{0.45\textwidth}
+\centering
+\paragraph{Remoção de 20:} O nó 20 tem dois filhos (18 e 25). Para a remoção de um nó com dois filhos, escolhemos o sucessor in-ordem, que é o nó 25, para substituir o 20.
+
+
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=30mm},
+    level 2/.style={sibling distance=20mm},
+    level 3/.style={sibling distance=10mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {15}
+    child {node {10}
+      child {node {05}}
+      child {node {12}}
+    }
+    child {node {25}
+      child {node {18}}
+      child {node {98}
+        child {node {44}}
+      }
+    };
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\vspace{-1.25cm}
+\centering
+\paragraph{Remoção de 05:} O nó 05 é uma folha, então sua remoção não afeta a estrutura da árvore.
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=40mm},
+    level 2/.style={sibling distance=30mm},
+    level 3/.style={sibling distance=20mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {15}
+    child {node {10}
+      child {node {12}}
+    }
+    child {node {25}
+      child {node {18}}
+      child {node {98}
+        child {node {44}}
+      }
+    };
+\end{tikzpicture}
+\vspace{-0.5cm}
+\end{minipage}
+\end{center}
+
+\vspace{-0.5cm} % Espaçamento entre as remoções
+
+\begin{center}
+\begin{minipage}{0.45\textwidth}
+\centering
+\paragraph{Remoção de 18:} O nó 18 é uma folha, então sua remoção não afeta a estrutura.
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=40mm},
+    level 2/.style={sibling distance=30mm},
+    level 3/.style={sibling distance=20mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {15}
+    child {node {10}
+      child {node {12}}
+    }
+    child {node {25}
+      child {node {98}
+        child {node {44}}
+      }
+    };
+\end{tikzpicture}
+\vspace{-0.5cm}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Remoção de 44:} O nó 44 é uma folha, então sua remoção também não afeta a estrutura da árvore.\\[0cm]
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=40mm},
+    level 2/.style={sibling distance=30mm},
+    level 3/.style={sibling distance=20mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {15}
+    child {node {10}
+      child {node {12}}
+    }
+    child {node {25}
+      child {node {98}}
+    };
+\end{tikzpicture}
+\vspace{-0.5cm}
+\end{minipage}
+\end{center}
+
+\vspace{1cm}
+
+\begin{center}
+\subsection{Questão 1.3: Pesquisa em Árvore com Diferentes Tipos de Caminhamentos}
+
+Nesta seção, utilizamos quatro tipos de caminhamento para localizar um elemento específico na árvore binária: pré-ordem, inordem, pós-ordem e em largura. Vamos analisar o número de interações e a ordem de visitação dos nós até encontrar o elemento selecionado.
+
+\subsubsection{Árvore de Exemplo}
+
+Abaixo está a representação gráfica da árvore binária utilizada para esta análise:
+
+\end{center}
+\begin{center}
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=40mm},
+    level 2/.style={sibling distance=20mm},
+    level 3/.style={sibling distance=15mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {88}
+    child {node {22}
+      child {node {13}}
+      child {node {59}
+        child {node {27}}
+      }
+    };
+\end{tikzpicture}
+
+Vamos selecionar o nó \textbf{59} para ser localizado em cada um dos percorrimentos.
+
+\end{center}
+\subsubsection{Percorrimento Inordem}
+
+No percorrimento inordem (ou em ordem), visitamos o nó mais à esquerda, depois a raiz e, em seguida, os nós à direita. A ordem de visitação dos nós na árvore seria:
+
+\begin{verbatim}
+13 → 22 → 27 → 59 → 88
+\end{verbatim}
+
+\noindent
+Para localizar o elemento \textbf{59}, o caminho percorrido seria: 13, 22, 27, \underline{59}. Foram necessárias \textbf{4 interações} até encontrar o elemento.
+
+\subsubsection{Percorrimento Pós-ordem}
+
+No percorrimento pós-ordem, primeiro visitamos todos os filhos de um nó e, em seguida, o próprio nó. A ordem de visitação dos nós seria:
+
+\begin{verbatim}
+13 → 27 → 59 → 22 → 88
+\end{verbatim}
+
+\noindent
+O caminho até o elemento \textbf{59} seria: 13, 27, \underline{59}. Foram necessárias \textbf{3 interações} para encontrar o elemento.
+
+\subsubsection{Percorrimento em Largura}
+
+O percorrimento em largura visita os nós em cada nível da árvore da esquerda para a direita. A ordem de visitação seria:
+
+\begin{verbatim}
+88 → 22 → 13 → 59 → 27
+\end{verbatim}
+
+\noindent
+Neste caso, o elemento \textbf{59} foi encontrado após \textbf{4 interações}, com o caminho: 88, 22, 13, \underline{59}.
+
+\subsubsection{Eficiência dos Métodos}
+
+Podemos observar que os diferentes tipos de caminhamento apresentam diferentes números de interações. O percorrimento pós-ordem foi o mais eficiente para encontrar o elemento \textbf{59}, seguido pelo inordem e, por último, o em largura.
+
+\begin{center}
+\subsubsection{Percorrimento de Pesquisa na Árvore: Exemplo 2}
+
+Utilizaremos a seguinte árvore binária para realizar o estudo dos diferentes tipos de caminhamento. O nó escolhido para ser localizado será o \textbf{34}.
+
+\begin{center}
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=40mm},
+    level 2/.style={sibling distance=30mm},
+    level 3/.style={sibling distance=20mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {47}
+    child {node {21}
+      child {node {05}}
+      child {node {34}
+        child {node {28}}
+      }
+    };
+\end{tikzpicture}
+\end{center}
+\end{center}
+
+\subsubsection{Percorrimento Inordem}
+
+No percorrimento inordem (ou em ordem), visitamos o nó mais à esquerda, depois a raiz e, em seguida, os nós à direita. A ordem de visitação dos nós na árvore seria:
+
+\begin{verbatim}
+05 → 21 → 28 → 34 → 47
+\end{verbatim}
+
+\noindent
+Para localizar o elemento \textbf{34}, o caminho percorrido seria: 05, 21, 28, \underline{34}. Foram necessárias \textbf{4 interações} até encontrar o elemento.
+
+\subsubsection{Percorrimento Pós-ordem}
+
+No percorrimento pós-ordem, primeiro visitamos todos os filhos de um nó e, em seguida, o próprio nó. A ordem de visitação dos nós seria:
+
+\begin{verbatim}
+05 → 28 → 34 → 21 → 47
+\end{verbatim}
+
+\noindent
+O caminho até o elemento \textbf{34} seria: 05, 28, \underline{34}. Foram necessárias \textbf{3 interações} para encontrar o elemento.
+
+\subsubsection{Percorrimento em Largura}
+
+No percorrimento em largura, visitamos os nós em cada nível da árvore da esquerda para a direita. A ordem de visitação seria:
+
+\begin{verbatim}
+47 → 21 → 05 → 34 → 28
+\end{verbatim}
+
+\noindent
+Neste caso, o elemento \textbf{34} foi encontrado após \textbf{4 interações}, com o caminho: 47, 21, 05, \underline{34}.
+
+\subsubsection{Eficiência dos Métodos}
+
+Analisando os diferentes tipos de caminhamento, observamos que o método pós-ordem é o mais eficiente para localizar o elemento \textbf{34}, seguido pelo inordem e, por último, o em largura.
+\begin{center}
+\subsubsection{Percorrimento de Pesquisa na Árvore: Exemplo 3}
+
+Utilizaremos a seguinte árvore binária para realizar o estudo dos diferentes tipos de caminhamento. O nó escolhido para ser localizado será o \textbf{60}.
+\end{center}
+\begin{center}
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=40mm},
+    level 2/.style={sibling distance=30mm},
+    level 3/.style={sibling distance=20mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {65}
+    child {node {39}
+      child {node {23}}
+      child {node {60}
+        child {node {54}}
+      }
+    };
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Percorrimento Inordem}
+
+No percorrimento inordem (ou em ordem), visitamos o nó mais à esquerda, depois a raiz e, em seguida, os nós à direita. A ordem de visitação dos nós na árvore seria:
+
+\begin{verbatim}
+23 → 39 → 54 → 60 → 65
+\end{verbatim}
+
+\noindent
+Para localizar o elemento \textbf{60}, o caminho percorrido seria: 23, 39, 54, \underline{60}. Foram necessárias \textbf{4 interações} até encontrar o elemento.
+
+\subsubsection{Percorrimento Pós-ordem}
+
+No percorrimento pós-ordem, primeiro visitamos todos os filhos de um nó e, em seguida, o próprio nó. A ordem de visitação dos nós seria:
+
+\begin{verbatim}
+23 → 54 → 60 → 39 → 65
+\end{verbatim}
+
+\noindent
+O caminho até o elemento \textbf{60} seria: 23, 54, \underline{60}. Foram necessárias \textbf{3 interações} para encontrar o elemento.
+
+\subsubsection{Percorrimento em Largura}
+
+No percorrimento em largura, visitamos os nós em cada nível da árvore da esquerda para a direita. A ordem de visitação seria:
+
+\begin{verbatim}
+65 → 39 → 23 → 60 → 54
+\end{verbatim}
+
+\noindent
+Neste caso, o elemento \textbf{60} foi encontrado após \textbf{4 interações}, com o caminho: 65, 39, \underline{60}.
+
+\subsubsection{Eficiência dos Métodos - Exemplo 3}
+
+\paragraph{Exemplo 3 (Nó-alvo: 60)}
+
+\begin{itemize}
+    \item \textbf{Percorrimento Inordem}: Foram necessárias \textbf{4 interações}.
+    \item \textbf{Percorrimento Pós-ordem}: Foram necessárias \textbf{3 interações}.
+    \item \textbf{Percorrimento em Largura}: Foram necessárias \textbf{4 interações}.
+\end{itemize}
+
+No exemplo 3, o método \textbf{pós-ordem} foi o mais eficiente, localizando o nó \textbf{60} com apenas \textbf{3 interações}. O inordem e o em largura empataram, necessitando de \textbf{4 interações}.
+
+\begin{center}
+\subsubsection{Percorrimento de Pesquisa na Árvore: Exemplo 4}
+
+Utilizaremos a seguinte árvore binária para realizar o estudo dos diferentes tipos de caminhamento. O nó escolhido para ser localizado será o \textbf{98}.
+\end{center}
+\begin{center}
+\begin{tikzpicture}
+  [
+    level 1/.style={sibling distance=40mm},
+    level 2/.style={sibling distance=30mm},
+    level 3/.style={sibling distance=20mm},
+    edge from parent/.style={draw,-latex}
+  ]
+  \node {15}
+    child {node {10}
+      child {node {12}}
+    }
+    child {node {25}
+      child {node {98}}
+    };
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Percorrimento Inordem}
+
+No percorrimento inordem (ou em ordem), visitamos o nó mais à esquerda, depois a raiz e, em seguida, os nós à direita. A ordem de visitação dos nós na árvore seria:
+
+\begin{verbatim}
+10 → 12 → 15 → 25 → 98
+\end{verbatim}
+
+\noindent
+Para localizar o elemento \textbf{98}, o caminho percorrido seria: 10, 12, 15, 25, \underline{98}. Foram necessárias \textbf{5 interações} até encontrar o elemento.
+
+\subsubsection{Percorrimento Pós-ordem}
+
+No percorrimento pós-ordem, primeiro visitamos todos os filhos de um nó e, em seguida, o próprio nó. A ordem de visitação dos nós seria:
+
+\begin{verbatim}
+12 → 10 → 98 → 25 → 15
+\end{verbatim}
+
+\noindent
+O caminho até o elemento \textbf{98} seria: 12, 10, \underline{98}. Foram necessárias \textbf{3 interações} para encontrar o elemento.
+
+\subsubsection{Percorrimento em Largura}
+
+No percorrimento em largura, visitamos os nós em cada nível da árvore da esquerda para a direita. A ordem de visitação seria:
+
+\begin{verbatim}
+15 → 10 → 25 → 12 → 98
+\end{verbatim}
+
+\noindent
+Neste caso, o elemento \textbf{98} foi encontrado após \textbf{4 interações}, com o caminho: 15, 10, 25, \underline{98}.
+
+
+\subsubsection{Eficiência dos Métodos - Exemplo 4}
+
+\paragraph{Exemplo 4 (Nó-alvo: 98)}
+
+\begin{itemize}
+    \item \textbf{Percorrimento Inordem}: Foram necessárias \textbf{5 interações}.
+    \item \textbf{Percorrimento Pós-ordem}: Foram necessárias \textbf{3 interações}.
+    \item \textbf{Percorrimento em Largura}: Foram necessárias \textbf{4 interações}.
+\end{itemize}
+
+No exemplo 4, assim como no exemplo anterior, o método \textbf{pós-ordem} também foi o mais eficiente, localizando o nó \textbf{98} com \textbf{3 interações}. O percorrimento em largura foi intermediário, com \textbf{4 interações}, enquanto o inordem precisou de \textbf{5 interações}.
+
+\subsection{(Desafio adicional) Em cada árvore, identifique um subconjunto de elementos cujas re-
+moções resultem no maior número de rotações}
+
+\subsubsection{Funcionamento do Código e Identificação de Subconjuntos de Nós com Maior Número de Rotações}
+
+O código apresentado é uma implementação de uma árvore AVL (AVLTree) em C++. A árvore AVL é uma árvore binária de busca auto-balanceada, onde a diferença de altura entre as subárvores esquerda e direita de qualquer nó é no máximo 1. Isso garante que as operações de inserção, remoção e busca sejam realizadas em tempo logarítmico.
+
+\paragraph{Descrição do Código}
+O trecho de código fornecido realiza as seguintes operações:
+
+\begin{itemize}
+    \item Cria uma instância temporária de uma árvore AVL (\texttt{tempTree}) e clona a árvore original (\texttt{root}) para essa instância.
+    \item Reseta o contador de rotações (\texttt{rotationCount}) para zero.
+    \item Imprime a árvore antes da remoção de um nó específico (\texttt{key}).
+    \item Remove o nó especificado (\texttt{key}) da árvore temporária e armazena o número de rotações realizadas durante a remoção.
+    \item Imprime a árvore após a remoção do nó.
+    \item Armazena o par \{chave, número de rotações\} em um vetor (\texttt{rotations}).
+\end{itemize}
+
+\paragraph{Identificação de Subconjuntos de Nós com Maior Número de Rotações}
+Para identificar os subconjuntos de nós que resultam no maior número de rotações, o código realiza as seguintes etapas:
+
+\begin{enumerate}
+    \item Insere uma série de valores na árvore AVL principal (\texttt{tree}) no \texttt{main}.
+    \item Para cada nó a ser removido, cria uma árvore temporária (\texttt{tempTree}) que é uma cópia da árvore original.
+    \item Remove o nó da árvore temporária e conta o número de rotações realizadas durante a remoção.
+    \item Armazena o número de rotações associadas a cada nó removido em um vetor (\texttt{rotations}).
+    \item O vetor \texttt{rotations} pode então ser analisado para determinar quais nós resultaram no maior número de rotações.
+\end{enumerate}
+
+\paragraph{Exemplo de Uso}
+No \texttt{main}, a árvore AVL é populada com os valores \{88, 22, 45, 33, 22, 90, 27, 59, 13\}. Para cada remoção de nó, o código imprime a árvore antes e depois da remoção e armazena o número de rotações realizadas. Esse processo permite identificar quais remoções causam o maior número de rotações, ajudando a entender o comportamento da árvore AVL em diferentes cenários de remoção.
+
+\begin{verbatim}
+AVLTree tree;
+tree.insert(88);
+tree.insert(22);
+tree.insert(45);
+tree.insert(33);
+tree.insert(22);
+tree.insert(90);
+tree.insert(27);
+tree.insert(59);
+tree.insert(13);
+\end{verbatim}
+
+O par \texttt{maxRotation} pode ser utilizado para armazenar o nó e o número máximo de rotações observadas durante as remoções, permitindo uma análise eficiente dos subconjuntos de nós com maior impacto na estrutura da árvore AVL.
+
+\paragraph{Falhas do Programa}
+Uma falha notável no programa é que ele não considera adequadamente os nós que resultam no mesmo número de rotações. O código apenas armazena o primeiro nó encontrado com o maior número de rotações e prossegue, ignorando outros nós que poderiam ter o mesmo impacto na estrutura da árvore AVL. Isso pode levar a uma análise incompleta ou incorreta dos nós que causam o maior número de rotações, já que nós adicionais com o mesmo número de rotações não são considerados. Para uma análise mais precisa, o programa deveria armazenar todos os nós que resultam no maior número de rotações e não apenas o primeiro encontrado.
+
+\paragraph{Conclusão e Respostas} Nas arvores de inserção sem remover previamente os numeros requisitados o conjuntos de nós com maiores numeros de rotações são:
+\begin{enumerate}
+    \item Arvore 1 : {27}.
+    \item Arvore 2 : {47,5}
+    \item Arvore 3: {23,60}
+    \item Arvore 4: {15,44}
+\end{enumerate}
+
+\section{Questão 2: Programa Implementado em C++, projeto de análise geral de árvores BST}
+
+O programa apresentado simula o crescimento e as operações de inserção e remoção de nós em árvores binárias. O objetivo principal é comparar o desempenho de uma árvore binária desbalanceada com uma árvore binária equilibrada, ilustrando como a estrutura da árvore pode impactar o desempenho das operações de busca e inserção.
+
+\subsection{Estruturas de Dados}
+O programa utiliza a estrutura de árvore binária, representada pela estrutura \texttt{Node}, onde cada nó contém um valor (\texttt{data}) e dois ponteiros (\texttt{left} e \texttt{right}) que apontam para os filhos esquerdo e direito, respectivamente. As operações fundamentais de inserção (\texttt{insert}), remoção (\texttt{remove}) e cálculo da altura máxima (\texttt{calcNivelMaximo}) são implementadas para gerenciar a árvore.
+
+\subsection{Comparação entre Árvore Binária Desbalanceada e Árvore Binária Equilibrada}
+A principal diferença entre as duas árvores reside na maneira como os elementos são inseridos. Na árvore desbalanceada, os elementos são inseridos em ordem crescente, o que resulta em uma árvore com altura proporcional ao número de elementos (\(O(n)\)). Já na árvore equilibrada, os elementos são inseridos de forma a garantir um balanceamento mais eficiente, o que resulta em uma altura de \(O(\log n)\), melhorando o desempenho da busca e das operações subsequentes.
+
+\subsubsection{Funcionamento do Programa}
+O programa realiza as seguintes operações:
+\begin{itemize}
+    \item \textbf{Inserção de nós}: A função \texttt{insert} insere um valor na árvore, mantendo a ordem dos elementos.
+    \item \textbf{Remoção de nós}: A função \texttt{remove} permite a remoção de um nó da árvore, realizando a reorganização dos nós, se necessário.
+    \item \textbf{Cálculo da altura máxima}: A função \texttt{calcNivelMaximo} calcula a altura da árvore, que é um indicador de quão balanceada ela está.
+    \item \textbf{Exibição do caminho mais longo}: A função \texttt{mostrarCaminhoMaisLongo} exibe o caminho mais longo da raiz até a folha mais distante.
+    \item \textbf{Comparação de crescimento}: A função \texttt{compararCrescimentoArvores} compara o crescimento da altura das árvores desbalanceada e equilibrada, exibindo o impacto da estrutura na performance.
+    \item \textbf{Sugestão de rotações}: A função \texttt{`sugerirRotacoes` percorre a árvore binária e sugere rotações para balancear a árvore. Abaixo está a implementação da função em C++.}
+\end{itemize}
+
+\subsubsection{Função sugerirRotacoes : \textbf{Desafio Adicional}}
+
+A função `sugerirRotacoes` é utilizada para verificar o balanceamento de uma árvore binária e sugerir rotações para balanceá-la. O balanceamento é importante para garantir a eficiência das operações de busca, inserção e remoção.
+
+\paragraph{Cálculo da Profundidade}
+A função `calcularProfundidade` determina a profundidade máxima de uma subárvore. Se o nó for nulo, a profundidade é zero. Caso contrário, a profundidade é 1 mais a profundidade máxima entre as subárvores esquerda e direita.
+
+\paragraph{Verificação de Balanceamento}
+A função `sugerirRotacoes` percorre a árvore binária e calcula a profundidade das subárvores esquerda e direita de cada nó. Se a diferença de profundidade entre as subárvores for maior que 1, a árvore é considerada desbalanceada nesse nó.
+
+\paragraph{Sugestão de Rotações}
+Dependendo de qual subárvore é mais profunda, a função sugere uma rotação para balancear a árvore:
+- Se a subárvore esquerda é mais profunda, sugere uma rotação à direita.
+- Se a subárvore direita é mais profunda, sugere uma rotação à esquerda.
+
+Essas rotações ajudam a manter a diferença de profundidade entre as subárvores esquerda e direita de qualquer nó dentro de um limite aceitável, geralmente 1, garantindo a eficiência das operações na árvore binária.
+
+\subsubsection{Impacto no Desempenho}
+A principal vantagem de uma árvore equilibrada é sua eficiência. Em uma árvore desbalanceada, as operações de inserção, remoção e busca podem ter um tempo de execução linear (\(O(n)\)) no pior caso, o que pode ser ineficiente para grandes volumes de dados. Por outro lado, uma árvore equilibrada garante que a altura seja limitada a \(O(\log n)\), o que resulta em um desempenho muito mais rápido, especialmente quando o número de elementos aumenta.
+
+Na \texttt{compararCrescimentoArvores}, a comparação do nível máximo das árvores após várias inserções revela a diferença de crescimento entre as duas estruturas. A tabela a seguir mostra como o nível máximo das árvores desbalanceada e equilibrada evolui à medida que os elementos são inseridos.
+
+\begin{verbatim}
+Insercao   Nivel Max Desbal   Nivel Max Equil   Depreciacao (%)
+-------------------------------------------------------------
+10         1                  0                  0%
+20         2                  1                  50%
+30         3                  1                  66.67%
+40         4                  2                  100%
+...
+\end{verbatim}
+
+Como mostrado, a diferença de altura entre as árvores aumenta à medida que mais elementos são inseridos na árvore desbalanceada, resultando em uma maior \textit{depreciação} no desempenho da árvore desbalanceada.
+
+\subsubsection{Ambiguidades no Desempenho}
+Embora o balanceamento da árvore melhore significativamente o desempenho em muitos casos, o comportamento pode ser ambíguo em situações específicas. Por exemplo, em uma árvore já balanceada ou em casos com dados homogêneos, a diferença de desempenho entre a árvore desbalanceada e a equilibrada pode ser menor. Ainda assim, a árvore equilibrada garante um desempenho previsível e eficiente para uma ampla gama de cenários.
+
+\subsection{Conclusão}
+A utilização de uma árvore binária equilibrada oferece vantagens claras em termos de desempenho, principalmente em grandes conjuntos de dados. O balanceamento da árvore garante que o tempo de busca e outras operações importantes permaneçam eficientes, com uma altura limitada a \(O(\log n)\), enquanto a árvore desbalanceada pode levar a um desempenho de \(O(n)\) no pior caso. Ao comparar as duas árvores, é possível observar as diferenças no crescimento da altura e como isso afeta o desempenho geral do programa.
+
+
+\section{Questão 3: Programa implementado em C++, projeto de dicionário com autosugestão}
+
+Este programa foi desenvolvido para realizar buscas eficientes em um dicionário, utilizando duas estruturas de árvore binária: a \textbf{AVL Tree} e a \textbf{Binary Search Tree (BST)}. A principal funcionalidade é permitir que o usuário digite um prefixo e, com isso, obtenha sugestões de palavras autocompletadas a partir de uma lista pré-carregada de palavras e seus significados. O programa também oferece uma busca por palavras, retornando o significado correspondente.
+
+A seguir, descrevemos o funcionamento de cada parte do programa.
+
+\subsubsection{Estruturas de Dados}
+O programa utiliza duas estruturas principais para armazenar as palavras e seus significados: a \textbf{AVL Tree} e a \textbf{Binary Search Tree (BST)}. Ambas são árvores binárias de busca, mas a AVL Tree é auto-balanceada, o que proporciona um tempo de busca mais eficiente em casos de grandes volumes de dados.
+
+\subsubsection{AVL Tree}
+A \textbf{AVL Tree} é uma árvore binária de busca auto-balanceada, onde a diferença de altura entre as subárvores esquerda e direita de qualquer nó não pode ser superior a 1. Isso garante que as operações de inserção, busca e remoção ocorram em tempo logarítmico, mesmo no pior caso. O programa implementa a inserção de palavras na árvore e a busca por significados de forma eficiente.
+
+\subsubsection{Binary Search Tree (BST)}
+A \textbf{BST} é uma árvore binária onde, para cada nó, as palavras na subárvore esquerda são lexicograficamente menores, e as palavras na subárvore direita são lexicograficamente maiores. Embora a BST não seja balanceada como a AVL Tree, ela ainda proporciona uma busca eficiente, com tempo médio logarítmico.
+
+\subsubsection{Funcionalidade de Autocompletar}
+Uma das funcionalidades mais interativas do programa é o sistema de \textit{autocomplete}, que sugere palavras conforme o usuário digita um prefixo. Quando o usuário começa a digitar, o programa coleta as sugestões de palavras que começam com o prefixo fornecido.
+
+O sistema de autocomplete funciona da seguinte forma:
+\begin{itemize}
+    \item O usuário começa a digitar um prefixo.
+    \item O programa consulta a árvore escolhida (AVL ou BST) e coleta todas as palavras que começam com esse prefixo.
+    \item O programa exibe essas sugestões ao usuário em tempo real.
+    \item Caso o usuário pressione a tecla \texttt{TAB}, a primeira sugestão da lista de autocomplete é selecionada automaticamente para o prefixo, completando a palavra.
+    \item Caso o usuário pressione \texttt{ENTER}, o programa realiza a busca pelo significado da palavra completa.
+    \item O usuário também pode apagar caracteres pressionando a tecla \texttt{BACKSPACE}.
+\end{itemize}
+
+\subsubsection{Busca de Palavras}
+Além do sistema de autocomplete, o programa permite que o usuário busque uma palavra completa. Quando o prefixo é completado (pressionando \texttt{ENTER}), o programa realiza uma busca pela palavra na árvore escolhida, retornando seu significado, caso a palavra seja encontrada. O tempo de busca também é exibido para que o usuário saiba a eficiência da operação.
+
+\subsubsection{Entrada de Dados}
+Os dados (palavras e seus significados) são carregados a partir de um arquivo de texto (\texttt{dicionario.txt}). O formato do arquivo é simples, com cada linha contendo uma palavra seguida de seu significado, separadas por dois pontos (\texttt{:}). Por exemplo:
+\begin{verbatim}
+palavra: significado
+\end{verbatim}
+
+O programa suporta a leitura desse arquivo para preencher as árvores de palavras.
+
+\subsubsection{Interação com o Usuário}
+A interação com o usuário ocorre através de um terminal. O programa utiliza o modo de entrada sem precisar apertar \texttt{ENTER} após cada caractere, permitindo que o usuário veja as sugestões de palavras em tempo real. O terminal é configurado para captar caracteres pressionados diretamente (com exceção de \texttt{ENTER}, \texttt{ESC} e \texttt{TAB}).
+
+A interface permite:
+\begin{itemize}
+    \item Escolher a estrutura de dados (AVL ou BST).
+    \item Digitar o prefixo e visualizar sugestões.
+    \item Autocompletar palavras pressionando \texttt{TAB}.
+    \item Buscar o significado de palavras pressionando \texttt{ENTER}.
+    \item Apagar caracteres pressionando \texttt{BACKSPACE}.
+    \item Sair do programa pressionando \texttt{ESC}.
+\end{itemize}
+
+\subsubsection{Desempenho}
+
+A escolha da árvore \textbf{AVL} como estrutura de dados tem um impacto significativo no desempenho das operações de busca. A principal razão para a utilização da árvore AVL é seu balanceamento automático, o que garante que a altura da árvore seja sempre controlada, resultando em uma busca mais eficiente.
+
+\paragraph{Árvore AVL versus Árvore Binária de Busca (BST)}
+Na \textbf{Binary Search Tree (BST)}, a eficiência das operações de busca depende da profundidade da árvore. Se a árvore se tornar desbalanceada (por exemplo, se os elementos forem inseridos de forma ordenada), ela pode degenerar em uma lista ligada, com altura proporcional ao número de elementos (\(O(n)\)), tornando a busca linear. Esse comportamento leva a um tempo de busca ineficiente.
+
+Por outro lado, a \textbf{AVL Tree} é uma árvore binária auto-balanceada, o que significa que, após cada inserção ou remoção, ela reorganiza seus nós para garantir que a diferença de altura entre a subárvore esquerda e a direita de qualquer nó não seja maior do que 1. Isso garante que a altura da árvore seja sempre proporcional ao logaritmo do número de elementos (\(O(\log n)\)), proporcionando uma busca mais rápida mesmo em grandes conjuntos de dados.
+
+\paragraph{Exemplo de Código de Busca em Árvore AVL}
+A seguir, um exemplo de como a busca é realizada em uma árvore AVL:
+
+\begin{verbatim}
+bool searchAVL(AVLNode root, const string& word) {
+    if (!root) return false;  // Se a árvore está vazia, a palavra não foi encontrada.
+    if (word == root->word) return true;  // A palavra foi encontrada.
+    if (word < root->word) return searchAVL(root->left, word);  // Buscar na subárvore esquerda.
+    return searchAVL(root->right, word);  // Buscar na subárvore direita.
+}
+\end{verbatim}
+
+Neste código, a busca começa pela raiz e, dependendo da comparação entre a palavra procurada e a palavra no nó atual, a busca é direcionada para a subárvore esquerda ou direita. Como a árvore é balanceada, o número de comparações realizadas é proporcional ao logaritmo da altura da árvore.
+
+\paragraph{Impacto do Balanceamento no Desempenho}
+O balanceamento de uma árvore AVL faz com que ela tenha sempre uma altura mínima em comparação a uma árvore binária de busca não balanceada. A operação de balanceamento mantém a árvore o mais próxima possível de uma árvore balanceada, resultando em um tempo de busca muito mais rápido em comparação à BST em casos de inserções sequenciais ou desordenadas.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.0\linewidth]{image.png}
+    \caption{Comparação de desempenho entre Árvore AVL e Árvore Binária de Busca (BST). Acima AVL, Abaixo BST}
+    \label{fig:enter-label}
+\end{figure}
+
+A altura de uma árvore AVL é limitada a \(O(\log n)\), enquanto a altura de uma BST desbalanceada pode crescer até \(O(n)\) em casos desfavoráveis.
+
+\paragraph{Cenários Ambíguos de Desempenho}
+Apesar das vantagens de performance da árvore AVL, o tempo de busca pode ser ambíguo em alguns casos, dependendo do padrão de inserção dos dados. Por exemplo, ao inserir uma sequência de palavras aleatórias, o desempenho da árvore AVL será muito bom, já que ela garantirá um balanceamento adequado. No entanto, em casos muito específicos (como uma sequência de palavras já balanceadas ou com muitos dados semelhantes), a vantagem de desempenho pode ser menor. 
+
+Por outro lado, o comportamento de uma \textbf{BST} pode ser mais difícil de prever. Em casos de dados inseridos de forma não balanceada (por exemplo, em ordem crescente), a árvore degeneraria em uma lista ligada, tornando a busca tão lenta quanto \(O(n)\), enquanto a árvore AVL ainda manteria um desempenho de \(O(\log n)\).
+
+\paragraph{Conclusão sobre o Desempenho}
+Portanto, ao usar uma árvore AVL, garantimos um desempenho muito mais eficiente para grandes volumes de dados, especialmente quando comparado a uma árvore BST em situações onde a árvore pode se desbalancear. O balanceamento constante da árvore AVL mantém o tempo de busca \(O(\log n)\), independentemente da ordem de inserção dos elementos, garantindo maior previsibilidade e eficiência na execução do programa.
+
+\subsubsection{Fluxo Geral do Programa}
+O fluxo do programa é o seguinte:
+\begin{enumerate}
+    \item O usuário escolhe entre a AVL Tree ou a BST.
+    \item O programa carrega o arquivo de palavras e preenche a árvore escolhida.
+    \item O usuário começa a digitar um prefixo para buscar sugestões de palavras.
+    \item O sistema de autocomplete exibe as sugestões em tempo real.
+    \item O usuário pode pressionar \texttt{TAB} para autocompletar uma palavra ou \texttt{ENTER} para buscar seu significado.
+    \item O programa retorna o significado da palavra ou informa que a palavra não foi encontrada.
+\end{enumerate}
+
+O programa termina quando o usuário pressiona \texttt{ESC}.
+
+\end{document}
+
+\end{document}
