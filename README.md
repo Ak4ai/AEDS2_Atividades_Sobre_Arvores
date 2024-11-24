@@ -116,12 +116,13 @@ O repositório está organizado da seguinte forma:
     - **bst.cpp**: Implementação da árvore BST.
     - **bst.h**: Cabeçalho da árvore BST.
     - **main.cpp**: Arquivo principal do código-fonte.
-  - **datasetia.py**: Script Python relacionado ao exercício.
-  - **dicionario.txt**: Arquivo de texto com um dicionário.
-  - **google-10000-english-usa.txt**: Arquivo de texto com palavras em inglês.
-  - **palavras_portugues.txt**: Arquivo de texto com palavras em português.
-  - **testeopenai.py**: Script Python para testes.
-  - **Makefile**: Arquivo para automação da compilação.
+  - **datasets/**: Pastas com aquivos de Dataset.
+    - **datasetia.py**: Script Python relacionado ao exercício.
+    - **dicionario.txt**: Arquivo de texto com um dicionário.
+    - **google-10000-english-usa.txt**: Arquivo de texto com palavras em inglês.
+    - **palavras_portugues.txt**: Arquivo de texto com palavras em português.
+    - **testeopenai.py**: Script Python para testes.
+    - **Makefile**: Arquivo para automação da compilação.
 
 - **Pratica_03_AEDS_2.html**: Arquivo HTML do projeto.
 - **Pratica_03_AEDS_2.tex**: Arquivo LaTeX do projeto.
